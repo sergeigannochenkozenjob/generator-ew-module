@@ -96,11 +96,16 @@ module.exports = class extends Generator {
   }
 
   copyFiles() {
-    this.fs.copyTpl(
-      this.templatePath(''),
-      this.destinationPath(this.answers.moduleName),
-      this.answers
-    );
+    ['**/.*', ''].forEach((pattern) => {
+      this.fs.copyTpl(
+        this.templatePath(pattern),
+        this.destinationPath(this.answers.moduleName),
+        this.answers,
+        {
+          dot: true,
+        }
+      );
+    });
   }
 
   async makeScriptsExecutable() {
@@ -111,6 +116,7 @@ module.exports = class extends Generator {
   }
 
   install() {
+    return;
     const deps = [
       '@babel/polyfill',
     ];
