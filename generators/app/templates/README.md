@@ -6,9 +6,16 @@
 
 ## Build
 
+To re-build the development version on each file change:
 ~~~~
-npm install;
-npm run build.dev; # build a developlment version
-# or
-npm run build.prod; # build a prodction, minified and uglifyed version
+./script/run.sh
 ~~~~
+
+## Publish
+
+To publish a new version:
+
+* make changes
+* increment module version in `package.json`
+* sign-in into `npm`: `npm adduser <%- vendorName %>`
+* `./script/publish.sh`

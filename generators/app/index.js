@@ -44,7 +44,7 @@ module.exports = class extends Generator {
       {
         type: 'input',
         name: 'vendorName',
-        message: 'Vendor name (to use in GitHub URL, etc.)',
+        message: 'Vendor name (to use in GitHub URL, npm, etc.)',
       },
       {
         type: 'input',
