@@ -1,0 +1,9 @@
+{
+  "generator-node": {
+    "promptValues": {
+      "authorName": "Sergei Gannochenko",
+      "authorEmail": "gannochenko.sv@gmail.com",
+      "authorUrl": "gannochenkoff.com"
+    }
+  }
+}
