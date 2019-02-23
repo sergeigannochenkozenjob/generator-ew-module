@@ -116,7 +116,6 @@ module.exports = class extends Generator {
   }
 
   install() {
-    return;
     const deps = [
       '@babel/polyfill',
     ];

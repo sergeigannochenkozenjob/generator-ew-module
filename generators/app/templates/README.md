@@ -1,5 +1,7 @@
 # <%- moduleName %>
 
+<%- moduleDescription %>
+
 ## Installation
 
 ## Usage
