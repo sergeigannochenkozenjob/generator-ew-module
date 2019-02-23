@@ -81,7 +81,7 @@ module.exports = class extends Generator {
       },
       {
         type: 'confirm',
-        name: 'supportsCLI',
+        name: 'supportCLI',
         message: 'Do we support command-line interface?',
         default: false,
         when: answers => {
@@ -89,6 +89,8 @@ module.exports = class extends Generator {
         },
       },
     ]).then(props => {
+      props.supportCLI = props.supportCLI || false;
+      props.supportReact = props.supportReact || false;
       this.answers = props;
     });
   }

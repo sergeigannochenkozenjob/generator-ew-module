@@ -4,7 +4,7 @@
   "description": "<%- moduleDescription %>",<% if (useServerSide) { %>
   "main": "index.js",<% } %><% if (useClientSide) { %>
   "module": "build/client.js",
-  <% } %><% if (supportsCLI) { %>"bin": {
+  <% } %><% if (supportCLI) { %>"bin": {
     "module-name": "./build/server.js"
   },
   <% } %>"scripts": {
