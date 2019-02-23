@@ -129,10 +129,10 @@ module.exports = class extends Generator {
     ];
 
     if (deps.length) {
-      this.spawnCommand("npm", ["install", ...deps], {cwd: this.answers.applicationFolder});
+      this.spawnCommand("npm", ["install", ...deps], {cwd: this.answers.moduleName});
     }
     if (depsDev.length) {
-      this.spawnCommand("npm", ["install", ...depsDev, "--save-dev"], {cwd: this.answers.applicationFolder});
+      this.spawnCommand("npm", ["install", ...depsDev, "--save-dev"], {cwd: this.answers.moduleName});
     }
   }
 };
