@@ -4,8 +4,7 @@ const chalk = require('chalk');
 const yosay = require('yosay');
 const path = require('path');
 const pathExists = require('path-exists');
-const ejs = require('ejs');
-const yaml = require('js-yaml');
+// const ejs = require('ejs');
 const fs = require('fs');
 
 module.exports = class extends Generator {
@@ -73,7 +72,7 @@ module.exports = class extends Generator {
       },
       {
         type: 'confirm',
-        name: 'supportsReact',
+        name: 'supportReact',
         message: 'Do we support React?',
         default: false,
         when: answers => {
@@ -111,9 +110,20 @@ module.exports = class extends Generator {
 
   install() {
     const deps = [
+      '@babel/polyfill',
     ];
 
     const depsDev = [
+      '@babel/core',
+      '@babel/plugin-proposal-object-rest-spread',
+      '@babel/preset-env',
+      'babel-loader',
+      'npm-run-all',
+      'webpack',
+      'webpack-cli',
+      'webpack-node-externals',
+      'husky',
+      'jest',
     ];
 
     if (deps.length) {

@@ -15,7 +15,7 @@ module.exports = (env, argv) => {
       libraryTarget: 'amd',
     },
     resolve: {
-      extensions: ['.js', '.ts',<% if (supportsReact) { %> '.jsx', '.tsx',<% } %>],
+      extensions: ['.js', '.ts',<% if (supportReact) { %> '.jsx', '.tsx',<% } %>],
       alias: {
         './build/server.js': './build/client.js',
       },
