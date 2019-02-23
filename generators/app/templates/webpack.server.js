@@ -1,4 +1,4 @@
-const path = require('path');
+<% if (useServerSide) { %>const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const webpack = require('webpack');
 
@@ -64,3 +64,4 @@ module.exports = (env, argv) => {
     ],
   };
 };
+<% } %>

@@ -1,4 +1,4 @@
-const path = require('path');
+<% if (useClientSide) { %>const path = require('path');
 const webpack = require('webpack');
 
 module.exports = (env, argv) => {
@@ -15,11 +15,7 @@ module.exports = (env, argv) => {
       libraryTarget: 'amd',
     },
     resolve: {
-      <% if (supportReact) { %>
-      extensions: ['.ts', '.tsx', '.js', '.jsx'],
-      <% } else { %>
-      extensions: ['.ts', '.js'],
-      <% } %>
+      extensions: ['.js', '.ts',<% if (supportsReact) { %> '.jsx', '.tsx',<% } %>],
       alias: {
         './build/server.js': './build/client.js',
       },
@@ -27,7 +23,7 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
-          test: /\.js$/,
+          test: /\.jsx?$/,
           use: [
             {
               loader: 'babel-loader',
@@ -63,3 +59,4 @@ module.exports = (env, argv) => {
     ],
   };
 };
+<% } %>

@@ -2,37 +2,125 @@
 const Generator = require('yeoman-generator');
 const chalk = require('chalk');
 const yosay = require('yosay');
+const path = require('path');
+const pathExists = require('path-exists');
+const ejs = require('ejs');
+const yaml = require('js-yaml');
+const fs = require('fs');
 
 module.exports = class extends Generator {
   prompting() {
-    // Have Yeoman greet the user.
     this.log(
-      yosay(`Welcome to the beautiful ${chalk.red('generator-ew-module')} generator!`)
+      yosay(`This generator will create ${chalk.red('a new npm module starter')}.`)
     );
 
-    const prompts = [
+    return this.prompt([
+      {
+        type: 'input',
+        name: 'moduleName',
+        message: 'Module name',
+        validate: async (value) => {
+          if (typeof value !== "string") {
+            return 'Must be a string';
+          }
+
+          if (!value.match(/^[a-zA-Z0-9-_\.]+$/)) {
+            return 'Must contain only letters, digits, _ and - signs';
+          }
+
+          const dst = path.join(process.cwd(), value);
+          if (await pathExists(dst)) {
+            return `Folder exists: ${dst}`;
+          }
+
+          return true;
+        }
+      },
+      {
+        type: 'input',
+        name: 'moduleDescription',
+        message: 'Module description',
+        default: '',
+      },
+      {
+        type: 'input',
+        name: 'vendorName',
+        message: 'Vendor name (to use in GitHub URL, etc.)',
+      },
+      {
+        type: 'input',
+        name: 'authorName',
+        message: 'Author name (to appear in LICENSE, README.md, etc.)',
+        default: '',
+      },
+      {
+        type: 'input',
+        name: 'authorEmail',
+        message: 'Author email',
+        default: '',
+      },
       {
         type: 'confirm',
-        name: 'someAnswer',
-        message: 'Would you like to enable this option?',
-        default: true
-      }
-    ];
-
-    return this.prompt(prompts).then(props => {
-      // To access props later use this.props.someAnswer;
-      this.props = props;
+        name: 'useClientSide',
+        message: 'Do we use the module client-side?',
+        default: true,
+      },
+      {
+        type: 'confirm',
+        name: 'useServerSide',
+        message: 'Do we use the module server-side?',
+        default: true,
+      },
+      {
+        type: 'confirm',
+        name: 'supportsReact',
+        message: 'Do we support React?',
+        default: false,
+        when: answers => {
+          return answers.useClientSide;
+        },
+      },
+      {
+        type: 'confirm',
+        name: 'supportsCLI',
+        message: 'Do we support command-line interface?',
+        default: false,
+        when: answers => {
+          return answers.useServerSide;
+        },
+      },
+    ]).then(props => {
+      this.answers = props;
     });
   }
 
-  writing() {
-    this.fs.copy(
-      this.templatePath('dummyfile.txt'),
-      this.destinationPath('dummyfile.txt')
+  copyFiles() {
+    this.fs.copyTpl(
+      this.templatePath(''),
+      this.destinationPath(this.answers.moduleName),
+      this.answers
     );
   }
 
+  async makeScriptsExecutable() {
+    const scriptsPath = path.join(process.cwd(), 'script');
+    if (await pathExists(scriptsPath)) {
+      this.spawnCommand("chmod", ["+x", path.join(scriptsPath, '*')]);
+    }
+  }
+
   install() {
-    this.installDependencies();
+    const deps = [
+    ];
+
+    const depsDev = [
+    ];
+
+    if (deps.length) {
+      this.spawnCommand("npm", ["install", ...deps], {cwd: this.answers.applicationFolder});
+    }
+    if (depsDev.length) {
+      this.spawnCommand("npm", ["install", ...depsDev, "--save-dev"], {cwd: this.answers.applicationFolder});
+    }
   }
 };
