@@ -28,8 +28,8 @@ module.exports = (env, argv) => {
             {
               loader: 'babel-loader',
               options: {
-                presets: [
-                  '@babel/react',
+                presets: [<% if (supportReact) { %>
+                  '@babel/react',<% } %>
                   ['@babel/env', {
                     targets: {
                       browsers: ['last 2 versions'],
@@ -41,16 +41,11 @@ module.exports = (env, argv) => {
             },
           ],
         },
-        {
-          test: /\.tsx?$/,
-          use: 'ts-loader',
-          exclude: /node_modules/,
-        },
       ],
     },
     plugins: [
       new webpack.ProvidePlugin({
-        // logger: path.join(__dirname, `src/lib/logger.js`),
+        // varname: path.join(__dirname, `src/lib/module.js`),
       }),
       new webpack.DefinePlugin({
         __DEV__: development,

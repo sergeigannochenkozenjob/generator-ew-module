@@ -120,6 +120,11 @@ module.exports = class extends Generator {
       '@babel/polyfill',
     ];
 
+    if (this.answers.supportReact) {
+      deps.push('react');
+      deps.push('react-dom');
+    }
+
     const depsDev = [
       '@babel/core',
       '@babel/plugin-proposal-object-rest-spread',
@@ -132,6 +137,10 @@ module.exports = class extends Generator {
       'husky',
       'jest',
     ];
+
+    if (this.answers.supportReact) {
+      deps.push('@babel/preset-react');
+    }
 
     if (deps.length) {
       this.spawnCommand("npm", ["install", ...deps], {cwd: this.answers.moduleName});

@@ -4,7 +4,6 @@
 npm install -g yo;
 git clone https://github.com/awesome1888/generator-ew-module.git;
 cd generator-ew-module;
-npm install;
 npm link;
 cd <projects-folder>;
 yo ew-module;
