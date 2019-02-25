@@ -81,11 +81,17 @@ module.exports = class extends Generator {
       },
       {
         type: 'confirm',
+        name: 'isLibrary',
+        message: 'Is it a library? (if yes, we just pass it through Babel)',
+        default: false,
+      },
+      {
+        type: 'confirm',
         name: 'supportCLI',
         message: 'Do we support command-line interface?',
         default: false,
         when: answers => {
-          return answers.useServerSide;
+          return answers.useServerSide && !answers.isLibrary;
         },
       },
     ]).then(props => {
@@ -129,17 +135,20 @@ module.exports = class extends Generator {
       '@babel/core',
       '@babel/plugin-proposal-object-rest-spread',
       '@babel/preset-env',
-      'babel-loader',
       'npm-run-all',
-      'webpack',
-      'webpack-cli',
-      'webpack-node-externals',
       'husky',
       'jest',
     ];
 
+    if (!this.answers.isLibrary) {
+      depsDev.push('webpack');
+      depsDev.push('webpack-cli');
+      depsDev.push('webpack-node-externals');
+      depsDev.push('babel-loader');
+    }
+
     if (this.answers.supportReact) {
-      deps.push('@babel/preset-react');
+      depsDev.push('@babel/preset-react');
     }
 
     if (deps.length) {

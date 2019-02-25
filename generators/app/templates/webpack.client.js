@@ -1,4 +1,4 @@
-<% if (useClientSide) { %>const path = require('path');
+<% if (useClientSide && !isLibrary) { %>const path = require('path');
 const webpack = require('webpack');
 
 module.exports = (env, argv) => {
@@ -15,7 +15,7 @@ module.exports = (env, argv) => {
       libraryTarget: 'amd',
     },
     resolve: {
-      extensions: ['.js', '.ts',<% if (supportReact) { %> '.jsx', '.tsx',<% } %>],
+      extensions: ['.js',<% if (supportReact) { %> '.jsx',<% } %>],
       alias: {
         './build/server.js': './build/client.js',
       },
