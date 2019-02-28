@@ -1,4 +1,4 @@
-<% if (useClientSide && !isLibrary) { %>const path = require('path');
+<% if (useClientSide) { %>const path = require('path');
 const webpack = require('webpack');
 
 module.exports = (env, argv) => {

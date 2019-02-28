@@ -8,6 +8,7 @@
     "module-name": "./build/server.js"
   },
   <% } %>"scripts": {
+    "start": "npm-run-all --parallel build.*.prod",
     "build": "npm-run-all --parallel build.*.prod",<% if (useServerSide) { %>
     "build.server.prod": "webpack --config webpack.server.js --mode production",<% } %><% if (useClientSide) { %>
     <% } %>"build.client.prod": "webpack --config webpack.client.js --mode production",
