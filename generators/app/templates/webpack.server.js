@@ -54,13 +54,15 @@ module.exports = (env, argv) => {
     },
     plugins: [
       new webpack.ProvidePlugin({
-        // logger: path.join(__dirname, `src/lib/logger.js`),
+        // varname: path.join(__dirname, `src/lib/module.js`),
       }),
       new webpack.DefinePlugin({
         __DEV__: development,
         __TEST__: false,
       }),
+<% if (supportCLI) { %>
       new webpack.BannerPlugin({ banner: "#!/usr/bin/env node", raw: true }),
+<% } %>
     ],
   };
 };
