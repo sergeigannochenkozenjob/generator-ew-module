@@ -29,6 +29,12 @@
   },
   "dependencies": {
   },
+<% if (supportReact) { %>
+  "peerDependencies": {
+    "react": "16.x",
+    "react-dom": "16.x"
+  },
+<% } %>
   "husky": {
     "hooks": {
       "pre-commit": "pretty-quick --staged"

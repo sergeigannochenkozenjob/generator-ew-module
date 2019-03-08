@@ -73,7 +73,7 @@ module.exports = class extends Generator {
       {
         type: 'confirm',
         name: 'supportReact',
-        message: 'Do we support React?',
+        message: 'Do we use React?',
         default: false,
         when: answers => {
           return answers.useClientSide;
@@ -119,11 +119,6 @@ module.exports = class extends Generator {
     const deps = [
       '@babel/polyfill',
     ];
-
-    if (this.answers.supportReact) {
-      deps.push('react');
-      deps.push('react-dom');
-    }
 
     const depsDev = [
       '@babel/core',
