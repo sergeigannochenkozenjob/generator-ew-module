@@ -19,6 +19,7 @@ module.exports = (env, argv) => {
       alias: {
         './build/server.js': './build/client.js',
       },
+      symlinks: false,
     },
     module: {
       rules: [

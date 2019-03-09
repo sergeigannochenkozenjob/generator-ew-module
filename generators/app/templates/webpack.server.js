@@ -23,6 +23,7 @@ module.exports = (env, argv) => {
     },
     resolve: {
       extensions: ['.ts', '.js'],
+      symlinks: false,
     },
     module: {
       rules: [
