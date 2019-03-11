@@ -12,7 +12,6 @@ module.exports = (env, argv) => {
     output: {
       filename: 'client.js',
       path: path.join(__dirname, 'build'),
-      libraryTarget: 'amd',
     },
     resolve: {
       extensions: ['.js',<% if (supportReact) { %> '.jsx',<% } %>],

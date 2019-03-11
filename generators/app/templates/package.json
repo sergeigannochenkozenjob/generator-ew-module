@@ -1,8 +1,8 @@
 {
   "name": "<%- moduleName %>",
   "version": "1.0.0",
-  "description": "<%- moduleDescription %>",<% if (useServerSide) { %>
-  "main": "index.js",<% } %><% if (useClientSide) { %>
+  "description": "<%- moduleDescription %>",
+  "main": "index.js",<% if (useClientSide) { %>
   "module": "build/client.js",
   <% } %><% if (supportCLI) { %>"bin": {
     "module-name": "./build/server.js"
