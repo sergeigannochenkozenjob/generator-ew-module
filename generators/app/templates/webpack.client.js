@@ -12,6 +12,7 @@ module.exports = (env, argv) => {
     output: {
       filename: 'client.js',
       path: path.join(__dirname, 'build'),
+      libraryTarget: 'commonjs',
     },
     resolve: {
       extensions: ['.js',<% if (supportReact) { %> '.jsx',<% } %>],
